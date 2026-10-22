@@ -5,9 +5,10 @@ document.querySelectorAll('.wa-link').forEach(a => a.href = WA);
 
 // Testimonials: replace these with real ones
 const TESTIMONIALS = [
-  { text: 'Testimonial 1 goes here.', who: 'Patient name or initials' },
-  { text: 'Testimonial 2 goes here.', who: 'Patient name or initials' },
-  { text: 'Testimonial 3 goes here.', who: 'Patient name or initials' }
+  { text: 'I consulted Dr. Prerna for a chronic ATFL ankle injury. She was meticulous in identifying the exact areas causing pain and prescribed highly effective exercises that helped me rebuild strength. Her deep understanding of muscle function and rehabilitation is evident in every session.
+The clinic is very affordable, yet Dr. Prerna delivers exceptional expertise along with clear, detailed explanations of the recovery process. It was very easy for me to locate the clinic as its in the heart of Viman Nagar.', who: 'Deepak Uppal' },
+  { text: 'Dr Prerna is excellent at her work. Has helped me personally and online on many occasions, whilst teaching me good exercises to manage my pain. God bless her more', who: 'Punam N' },
+  { text: 'Great treatment I was totally satisfied. Highly recommended place.', who: 'Sunil Barry' }
 ];
 
 // Hero slider
