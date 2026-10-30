@@ -127,3 +127,28 @@ footer{background:#0d1514;color:#9fb3b0;text-align:center;padding:1.5rem;font-si
   .nav nav.open{display:flex}
 }
 @media(prefers-reduced-motion:reduce){.slide{transition:none}html{scroll-behavior:auto}}
+
+
+/* How it works: softened evolution artwork as a quiet story backdrop */
+#journey{
+  position:relative;
+  isolation:isolate;
+  background-color:#e9e4d8;
+  background-image:
+    linear-gradient(rgba(247,243,233,.72),rgba(247,243,233,.78)),
+    url("assets/how-it-works-evolution-soft.jpg");
+  background-size:cover;
+  background-position:center 48%;
+  background-repeat:no-repeat;
+}
+#journey .wrap{position:relative;z-index:1}
+#journey h2{text-shadow:0 1px 12px rgba(255,255,255,.65)}
+#journey .steps li{
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(119,91,67,.16);
+  box-shadow:0 8px 24px rgba(65,48,35,.07);
+  backdrop-filter:blur(2px);
+}
+@media(max-width:900px){
+  #journey{background-position:center;background-image:linear-gradient(rgba(247,243,233,.82),rgba(247,243,233,.86)),url("assets/how-it-works-evolution-soft.jpg")}
+}
