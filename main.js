@@ -19,6 +19,10 @@ The clinic is very affordable, yet Dr. Prerna delivers exceptional expertise alo
     text: 'Great treatment I was totally satisfied. Highly recommended place.',
     who: 'Sunil Barry'
   }
+  // Three more review slots are reserved. Add each new genuine review here when ready:
+  // { text: 'New patient review goes here', who: 'Patient name' },
+  // { text: 'New patient review goes here', who: 'Patient name' },
+  // { text: 'New patient review goes here', who: 'Patient name' }
 ];
 
 // Hero slider
