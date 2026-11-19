@@ -1,10 +1,9 @@
-// WhatsApp booking link (all "Book" buttons use this)
+// WhatsApp booking link shared by every booking call-to-action.
 const WA = 'https://wa.me/918329706442?text=' +
   encodeURIComponent("Hi Dr Prerna, I'd like to book an appointment at Body and Mind Physiotherapy.");
 document.querySelectorAll('.wa-link').forEach(a => a.href = WA);
 
-// Testimonials: replace these with real ones
-
+// Patient testimonials supplied for the website.
 const TESTIMONIALS = [
   {
     text: `I consulted Dr. Prerna for a chronic ATFL ankle injury. She was meticulous in identifying the exact areas causing pain and prescribed highly effective exercises that helped me rebuild strength. Her deep understanding of muscle function and rehabilitation is evident in every session.
@@ -19,48 +18,89 @@ The clinic is very affordable, yet Dr. Prerna delivers exceptional expertise alo
     text: 'Great treatment I was totally satisfied. Highly recommended place.',
     who: 'Sunil Barry'
   }
-  // Three more review slots are reserved. Add each new genuine review here when ready:
-  // { text: 'New patient review goes here', who: 'Patient name' },
-  // { text: 'New patient review goes here', who: 'Patient name' },
-  // { text: 'New patient review goes here', who: 'Patient name' }
 ];
 
-// Hero slider
+// Hero slider with reduced-motion support.
 const slides = [...document.querySelectorAll('.slide')];
 const dots = document.querySelector('.dots');
-let cur = 0, timer;
-slides.forEach((_, i) => {
-  const b = document.createElement('button');
-  b.setAttribute('aria-label', 'Show slide ' + (i + 1));
-  b.onclick = () => { show(i); restart(); };
-  dots.appendChild(b);
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let cur = 0;
+let heroTimer;
+
+function showSlide(index) {
+  if (!slides.length) return;
+  cur = (index + slides.length) % slides.length;
+  slides.forEach((slide, n) => {
+    slide.classList.toggle('on', n === cur);
+    slide.setAttribute('aria-hidden', n === cur ? 'false' : 'true');
+  });
+  if (dots) {
+    [...dots.children].forEach((dot, n) => {
+      dot.classList.toggle('on', n === cur);
+      dot.setAttribute('aria-pressed', n === cur ? 'true' : 'false');
+    });
+  }
+}
+function restartHero() {
+  clearInterval(heroTimer);
+  if (!reduceMotion && slides.length > 1) {
+    heroTimer = setInterval(() => showSlide(cur + 1), 6500);
+  }
+}
+if (dots) {
+  slides.forEach((_, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-label', 'Show slide ' + (index + 1));
+    button.setAttribute('aria-pressed', 'false');
+    button.addEventListener('click', () => {
+      showSlide(index);
+      restartHero();
+    });
+    dots.appendChild(button);
+  });
+}
+showSlide(0);
+restartHero();
+
+// Testimonial carousel.
+let testimonialIndex = 0;
+const quote = document.querySelector('.car blockquote');
+const citation = document.querySelector('.car cite');
+function showTestimonial(index) {
+  if (!quote || !citation || !TESTIMONIALS.length) return;
+  testimonialIndex = (index + TESTIMONIALS.length) % TESTIMONIALS.length;
+  quote.textContent = '\u201C' + TESTIMONIALS[testimonialIndex].text + '\u201D';
+  citation.textContent = TESTIMONIALS[testimonialIndex].who;
+}
+document.querySelectorAll('.car-ctl button').forEach(button => {
+  button.type = 'button';
+  button.addEventListener('click', () => {
+    showTestimonial(testimonialIndex + Number(button.dataset.d));
+  });
 });
-function show(i) {
-  cur = (i + slides.length) % slides.length;
-  slides.forEach((s, n) => s.classList.toggle('on', n === cur));
-  [...dots.children].forEach((d, n) => d.classList.toggle('on', n === cur));
-}
-function restart() {
-  clearInterval(timer);
-  if (!matchMedia('(prefers-reduced-motion:reduce)').matches) timer = setInterval(() => show(cur + 1), 6000);
-}
-show(0); restart();
+showTestimonial(0);
 
-// Testimonial carousel
-let t = 0;
-const q = document.querySelector('.car blockquote'), c = document.querySelector('.car cite');
-function showT(i) {
-  t = (i + TESTIMONIALS.length) % TESTIMONIALS.length;
-  q.textContent = '\u201C' + TESTIMONIALS[t].text + '\u201D';
-  c.textContent = TESTIMONIALS[t].who;
+// Avoid automatic testimonial movement for visitors who prefer reduced motion.
+if (!reduceMotion && TESTIMONIALS.length > 1) {
+  setInterval(() => showTestimonial(testimonialIndex + 1), 10000);
 }
-document.querySelectorAll('.car-ctl button').forEach(b => b.onclick = () => showT(t + +b.dataset.d));
-showT(0);
-setInterval(() => showT(t + 1), 8000);
 
-// Mobile menu
-const burger = document.querySelector('.burger'), menu = document.querySelector('.nav nav');
-burger.onclick = () => burger.setAttribute('aria-expanded', menu.classList.toggle('open'));
-menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+// Mobile navigation: keep the expanded state in sync with the menu.
+const burger = document.querySelector('.burger');
+const menu = document.querySelector('.nav nav');
+if (burger && menu) {
+  burger.addEventListener('click', () => {
+    const expanded = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(expanded));
+  });
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
 
-document.getElementById('yr').textContent = new Date().getFullYear();
+const year = document.getElementById('yr');
+if (year) year.textContent = new Date().getFullYear();
