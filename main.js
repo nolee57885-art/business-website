@@ -1,6 +1,6 @@
 // WhatsApp booking link shared by every booking call-to-action.
 const WA = 'https://wa.me/918329706442?text=' +
-  encodeURIComponent("Hi Dr Prerna, I'd like to book an appointment at Body and Mind Physiotherapy.");
+  encodeURIComponent("Hi Dr Prerna, I’d like to enquire about an appointment at Body and Mind Physiotherapy.\n\nName:\nWhat I need help with:\nPreferred day/time:\nClinic or home visit:");
 document.querySelectorAll('.wa-link').forEach(a => a.href = WA);
 
 // Patient testimonials supplied for the website.
