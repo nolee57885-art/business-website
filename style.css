@@ -174,16 +174,15 @@ footer{padding:1.4rem 1rem;background:#0b201b;color:#b9c9bf;text-align:center;fo
 }
 
 
-/* Footer social links */
+/* Footer social icon buttons */
 .site-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.8rem 2rem;padding:1.4rem 1rem;background:#0b201b;color:#b9c9bf;text-align:center;font-size:.84rem}
 .site-footer p{margin:0}
-.social-links{display:flex;align-items:center;justify-content:center;gap:1.15rem}
-.social-links a{display:inline-flex;align-items:center;gap:.45rem;color:#d6e0d9;text-decoration:none;transition:color .2s ease}
-.social-links a:hover{color:#e4b79d}
-.social-links svg{width:19px;height:19px;flex:none}
+.social-links{display:flex;align-items:center;justify-content:center;gap:.7rem}
+.social-links a{display:inline-flex;width:42px;height:42px;align-items:center;justify-content:center;border:1px solid rgba(214,224,217,.55);border-radius:50%;color:#d6e0d9;text-decoration:none;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease}
+.social-links a:hover{background:#16894d;border-color:#16894d;color:#fff;transform:translateY(-2px)}
+.social-links svg{width:20px;height:20px;flex:none}
 .social-links a:focus-visible{outline:2px solid #e4b79d;outline-offset:4px}
 @media(max-width:600px){.site-footer{flex-direction:column;gap:.8rem}}
-
 
 /* Homepage conversion and service-page refinements */
 .hero-kicker{margin:0 0 1rem!important;color:#e8c2aa!important;font-size:.78rem!important;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
