@@ -1,6 +1,6 @@
 // Analytics is ready to activate when the clinic's GA4 Measurement ID is added.
 // Leave empty until a real ID beginning with "G-" is supplied; never use a placeholder ID.
-const GA4_MEASUREMENT_ID = '';
+const GA4_MEASUREMENT_ID = 'G-8BVGYP72LZ';
 
 if (/^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID)) {
   window.dataLayer = window.dataLayer || [];
