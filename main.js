@@ -1,3 +1,39 @@
+// Analytics is ready to activate when the clinic's GA4 Measurement ID is added.
+// Leave empty until a real ID beginning with "G-" is supplied; never use a placeholder ID.
+const GA4_MEASUREMENT_ID = '';
+
+if (/^G-[A-Z0-9]+$/.test(GA4_MEASUREMENT_ID)) {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', GA4_MEASUREMENT_ID);
+
+  const gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4_MEASUREMENT_ID);
+  document.head.appendChild(gaScript);
+
+  // Track meaningful contact actions as GA4 events.
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href') || '';
+    if (link.matches('.wa-link') || href.startsWith('https://wa.me/')) {
+      window.gtag('event', 'generate_lead', { method: 'whatsapp' });
+    } else if (href.startsWith('tel:')) {
+      window.gtag('event', 'phone_click');
+    } else if (href.startsWith('mailto:')) {
+      window.gtag('event', 'email_click');
+    }
+  });
+
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', () => {
+      window.gtag('event', 'generate_lead', { method: 'website_form' });
+    });
+  });
+}
+
 // WhatsApp booking link shared by every booking call-to-action.
 const WA = 'https://wa.me/918329706442?text=' +
   encodeURIComponent("Hi Dr Prerna, I’d like to enquire about an appointment at Body and Mind Physiotherapy.\n\nName:\nWhat I need help with:\nPreferred day/time:\nClinic or home visit:");
