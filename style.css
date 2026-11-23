@@ -215,28 +215,3 @@ footer{padding:1.4rem 1rem;background:#0b201b;color:#b9c9bf;text-align:center;fo
  .service-page{padding-top:100px}
  .service-content{padding:3rem 0}
 }
-
-
-/* Subtle anatomical watermark — aligned with the clinic's sage/forest palette */
-#services{position:relative;isolation:isolate;overflow:hidden}
-#services::before{
-  content:"";position:absolute;z-index:0;inset:0;
-  background:url("assets/anatomy-watermark.svg") no-repeat right 5% center / min(47vw,560px) auto;
-  opacity:.72;pointer-events:none;
-}
-#services .wrap{position:relative;z-index:1}
-#journey{position:relative;isolation:isolate;overflow:hidden}
-#journey::after{
-  content:"";position:absolute;z-index:0;left:-5%;top:8%;width:min(32vw,390px);height:84%;
-  background:url("assets/anatomy-watermark.svg") no-repeat left center / contain;
-  opacity:.10;pointer-events:none;
-}
-#journey .wrap{position:relative;z-index:1}
-@media(max-width:900px){
-  #services::before{background-position:right -65px center;background-size:68vw auto;opacity:.45}
-  #journey::after{width:45vw;opacity:.07}
-}
-@media(max-width:600px){
-  #services::before{background-position:right -80px bottom 18px;background-size:88vw auto;opacity:.28}
-  #journey::after{width:58vw;left:-18%;opacity:.06}
-}
