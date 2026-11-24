@@ -261,3 +261,8 @@ footer{padding:1.4rem 1rem;background:#0b201b;color:#b9c9bf;text-align:center;fo
  .footer-bottom{padding:1rem 21px;flex-direction:column;align-items:flex-start}
 }
 @media(max-width:420px){.footer-main{grid-template-columns:1fr}.footer-brand{grid-column:auto}}
+
+
+/* How it works: keep the section heading clean, without the decorative stick motif */
+#journey .wrap>h2::before{content:none!important;display:none!important}
+#journey .steps p{line-height:1.68}
